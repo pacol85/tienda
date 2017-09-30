@@ -1,6 +1,6 @@
 <?php
 
-class Seccion extends \Phalcon\Mvc\Model
+class Audit extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -13,21 +13,13 @@ class Seccion extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $nombre;
+    public $log;
 
     /**
      *
      * @var string
      */
-    public $desc;
-
-    /**
-     * Initialize method for model.
-     */
-    public function initialize()
-    {
-        $this->hasMany('id', 'Menu', 'seccion', array('alias' => 'Menu'));
-    }
+    public $date;
 
     /**
      * Returns table name mapped in the model.
@@ -36,14 +28,14 @@ class Seccion extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'seccion';
+        return 'audit';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Seccion[]
+     * @return Audit[]
      */
     public static function find($parameters = null)
     {
@@ -54,7 +46,7 @@ class Seccion extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Seccion
+     * @return Audit
      */
     public static function findFirst($parameters = null)
     {

@@ -1,6 +1,6 @@
 <?php
 
-class Orden extends \Phalcon\Mvc\Model
+class Parameters extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -13,58 +13,31 @@ class Orden extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $numero;
+    public $param;
 
     /**
      *
      * @var string
      */
-    public $cliente;
+    public $value;
 
     /**
      *
      * @var string
      */
-    public $identificacion;
+    public $desc;
 
     /**
      *
      * @var string
      */
-    public $otros;
+    public $cdate;
 
     /**
      *
      * @var string
      */
-    public $estado;
-
-    /**
-     *
-     * @var string
-     */
-    public $hinicio;
-
-    /**
-     *
-     * @var string
-     */
-    public $hfinal;
-
-    /**
-     *
-     * @var string
-     */
-    public $prioridad;
-
-    /**
-     * Initialize method for model.
-     */
-    public function initialize()
-    {
-        $this->hasMany('id', 'Item', 'orden', array('alias' => 'Item'));
-        $this->belongsTo('estado', 'Orderstatus', 'id', array('alias' => 'Orderstatus'));
-    }
+    public $mdate;
 
     /**
      * Returns table name mapped in the model.
@@ -73,14 +46,14 @@ class Orden extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'orden';
+        return 'parameters';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Orden[]
+     * @return Parameters[]
      */
     public static function find($parameters = null)
     {
@@ -91,7 +64,7 @@ class Orden extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Orden
+     * @return Parameters
      */
     public static function findFirst($parameters = null)
     {

@@ -40,7 +40,7 @@ class ControllerBase extends Controller {
 		$this->response->setContent ( json_encode ( $data ) );
 		return $this->response;
 	}
-	public function elemento($t, $n, $l, $r = 0) {
+	public function elemento($t, $n, $l, $r = 0) { //r significa ahora required
 		$dId = "";
 		if (! is_numeric ( $r )) {
 			$dId = "id='$r'";
@@ -114,7 +114,7 @@ class ControllerBase extends Controller {
 									"size" => 30,
 									"class" => "form-control",
 									"id" => "$n[0]",
-									"readonly" => "" 
+									"required" => "" 
 							) );
 						} else {
 							$elem = $elem . $this->tag->textField ( array (
@@ -133,7 +133,7 @@ class ControllerBase extends Controller {
 									"class" => "form-control",
 									"id" => "$n[0]",
 									"value" => "$n[1]",
-									"readonly" => "" 
+									"required" => "" 
 							) );
 						} else {
 							$elem = $elem . $this->tag->textField ( array (
@@ -146,7 +146,18 @@ class ControllerBase extends Controller {
 						}
 						break;
 					case "m" :
+                                            if ($r == 1) {
 						$elem = $elem . $this->tag->textField ( array (
+								"$n[0]",
+								"size" => 30,
+								"class" => "form-control number",
+								"id" => "$n[0]",
+								"value" => "$n[1]",
+                                                    "required" => ""
+						) );
+						break;
+                                            }else{
+                                                $elem = $elem . $this->tag->textField ( array (
 								"$n[0]",
 								"size" => 30,
 								"class" => "form-control number",
@@ -154,6 +165,7 @@ class ControllerBase extends Controller {
 								"value" => "$n[1]" 
 						) );
 						break;
+                                            }
 					case "e" :
 						$elem = $elem . $this->tag->textField ( array (
 								"$n[0]",
@@ -377,7 +389,7 @@ class ControllerBase extends Controller {
 	}
 	
 	/*
-	 * Función para creación de Links
+	 * Funciï¿½n para creaciï¿½n de Links
 	 */
 	public function a($tipo, $accion, $label, $data = []){
 		$a = "<a ";
@@ -539,7 +551,7 @@ class ControllerBase extends Controller {
 	}
 	
 	/**
-	 * Form con menú de cafetería
+	 * Form con menï¿½ de cafeterï¿½a
 	 */
 	public function formCafe($campos, $posMenu, $action, $id = "id") {
 		$form = $this->tag->form ( array (
@@ -549,7 +561,7 @@ class ControllerBase extends Controller {
 				"id" => "$id"
 		) );
 	
-		//counter para la posición del menú
+		//counter para la posiciï¿½n del menï¿½
 		$counter = 1;
 		
 		foreach ( $campos as $c ) {
@@ -586,7 +598,7 @@ class ControllerBase extends Controller {
 		//cada fila 4 columnas
 		$cols = 4;
 		$c = 1;
-		//menu a cargar agrupado por sección
+		//menu a cargar agrupado por secciï¿½n
 		$menu = Menu::find(["order" => "seccion"]);
 		foreach ($menu as $m){
 			if($c == 1){
@@ -622,7 +634,7 @@ class ControllerBase extends Controller {
 	}
 	
 	/**
-	 * Form con menú de cocina
+	 * Form con menï¿½ de cocina
 	 */
 	public function formCocina($action, $id = "id") {
 		$form = $this->tag->form ( array (
@@ -641,10 +653,10 @@ class ControllerBase extends Controller {
 	public function loadCocinaTotal(){
 		$hm = "<div class='form-group main'><div class='col-sm-12' align='center' >";
 		$hm = $hm . "<table id='tmenu' class='tmenu'><tbody>";
-		//cada fila 4 columnas, se mostrará item y luego total, así emparejados por cada fila 2 items
+		//cada fila 4 columnas, se mostrarï¿½ item y luego total, asï¿½ emparejados por cada fila 2 items
 		$cols = 4;
 		$c = 1;
-		//menu a cargar agrupado por sección
+		//menu a cargar agrupado por secciï¿½n
 		//
 		$menu = Menu::find(["order" => "seccion"]);
 		$elem = "";
@@ -692,7 +704,7 @@ class ControllerBase extends Controller {
 	}
 	
 	/**
-	 * Crear fila con clase específica
+	 * Crear fila con clase especï¿½fica
 	 * @param String $col
 	 * @param String $class
 	 * @return string

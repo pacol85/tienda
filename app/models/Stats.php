@@ -1,6 +1,6 @@
 <?php
 
-class Orderstatus extends \Phalcon\Mvc\Model
+class Stats extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -13,7 +13,13 @@ class Orderstatus extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $estado;
+    public $stat;
+
+    /**
+     *
+     * @var double
+     */
+    public $value;
 
     /**
      *
@@ -22,28 +28,20 @@ class Orderstatus extends \Phalcon\Mvc\Model
     public $desc;
 
     /**
-     * Initialize method for model.
-     */
-    public function initialize()
-    {
-        $this->hasMany('id', 'Orden', 'estado', array('alias' => 'Orden'));
-    }
-
-    /**
      * Returns table name mapped in the model.
      *
      * @return string
      */
     public function getSource()
     {
-        return 'orderstatus';
+        return 'stats';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Orderstatus[]
+     * @return Stats[]
      */
     public static function find($parameters = null)
     {
@@ -54,7 +52,7 @@ class Orderstatus extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Orderstatus
+     * @return Stats
      */
     public static function findFirst($parameters = null)
     {

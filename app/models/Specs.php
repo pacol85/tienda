@@ -1,6 +1,6 @@
 <?php
 
-class Item extends \Phalcon\Mvc\Model
+class Specs extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -13,33 +13,20 @@ class Item extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $orden;
+    public $item;
 
     /**
      *
      * @var string
      */
-    public $menu;
-
-    /**
-     *
-     * @var integer
-     */
-    public $cantidad;
-
-    /**
-     *
-     * @var string
-     */
-    public $cambios;
+    public $text;
 
     /**
      * Initialize method for model.
      */
     public function initialize()
     {
-        $this->belongsTo('orden', 'Orden', 'id', array('alias' => 'Orden'));
-        $this->belongsTo('menu', 'Menu', 'id', array('alias' => 'Menu'));
+        $this->belongsTo('item', 'Items', 'id', array('alias' => 'Items'));
     }
 
     /**
@@ -49,14 +36,14 @@ class Item extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'item';
+        return 'specs';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Item[]
+     * @return Specs[]
      */
     public static function find($parameters = null)
     {
@@ -67,7 +54,7 @@ class Item extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Item
+     * @return Specs
      */
     public static function findFirst($parameters = null)
     {
