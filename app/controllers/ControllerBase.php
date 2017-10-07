@@ -715,4 +715,53 @@ class ControllerBase extends Controller {
 		$tr = $tr . "</tr>";
 		return $tr;
 	}
+    
+    /**
+     * Funciones para creacion de areas para tienda
+     * $img = images/gallery-image-1.jpg
+     * $titulo = Kool Shirt
+     * $proveedor = Partner Name
+     * $precio = $25.00
+     * $desc = Doloremque quo possimus quas necessitatibus blanditiis excepturi. Commodi, sunt asperiores tenetur deleniti labore!
+     * $mode = 1 (texto abajo), 2 texto dentro, 3 form
+     */
+        public function prodPicText($img, $titulo, $proveedor, $precio, $desc, $mode = 1){
+            
+            $htmlUnder = ' 
+            <div class="product-item-1">
+                    <div class="product-thumb">
+                        <img src="'.$img.'" alt="'.$titulo.'">
+                    </div> <!-- /.product-thumb -->
+                    <div class="product-content">
+                        <h5><a href="#">'.$titulo.'</a></h5>
+                        <span class="tagline">'.$proveedor.'</span>
+                        <span class="price">'.$precio.'</span>
+                        <p>'.$desc.'</p>
+                    </div> <!-- /.product-content -->
+                </div> <!-- /.product-item --> ';
+            
+            $htmlThumb = '<div class="product-thumb">
+                            <img src="'.$img.'" alt="'.$titulo.'">
+                        </div> <!-- /.product-thumb -->
+                        <div class="product-content overlay">
+                            <h5><a href="#">'.$titulo.'</a></h5>
+                            <span class="tagline">'.$proveedor.'</span>
+                            <span class="price">'.$precio.'</span>
+                            <p>'.$desc.'</p>
+                        </div> <!-- /.product-content -->';
+            
+            switch ($mode) {
+                case 1:
+                    $html = $htmlUnder;
+                    break;
+
+                default:
+                    $html = $htmlThumb;
+                    break;
+            }
+                        
+            return $html;
+        }
+        
+        
 }
