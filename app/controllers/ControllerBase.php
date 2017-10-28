@@ -727,20 +727,108 @@ class ControllerBase extends Controller {
      */
         public function prodPicText($img, $titulo, $proveedor, $precio, $desc, $mode = 1){
             
-            $htmlUnder = ' 
-            <div class="product-item-1">
+            switch ($mode) {
+                case 1:
+                    $htmlUnder = ' 
+                        <div class="product-item-1">
+                            <div class="product-thumb">
+                                <img src="'.$img.'" alt="'.$titulo.'">
+                            </div> <!-- /.product-thumb -->
+                            <div class="product-content">
+                                <h5><a href="#">'.$titulo.'</a></h5>
+                                <span class="tagline">'.$proveedor.'</span>
+                                <span class="price">'.$precio.'</span>
+                                <p>'.$desc.'</p>
+                            </div> <!-- /.product-content -->
+                        </div> <!-- /.product-item --> ';
+                    $html = $htmlUnder;
+                    break;
+                case 3: 
+                    $htmlRight = '<div class="product-thumb">
+                        <img src="'.$img.'" alt="">
+                    </div> <!-- /.product-thumb -->
+                    <div class="product-content">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <h5><a href="#">'.$titulo.'</a></h5>
+                                <span class="tagline">'.$proveedor.'</span>
+                                <span class="price">'.$precio.'</span>
+                            </div> <!-- /.col-md-6 -->
+                            <div class="col-md-6 col-sm-6">
+                                <div class="full-row">
+                                    <label for="cat">Gender:</label>
+                                    <select name="cat" id="cat" class="postform">
+                                        <option value="-1">- Select -</option>
+                                        <option class="level-0" value="49">Female</option>
+                                        <option class="level-0" value="56">Male</option>
+                                    </select>
+                                </div>
+                                <div class="full-row">
+                                    <label for="cat1">Size:</label>
+                                    <select name="cat1" id="cat1" class="postform">
+                                        <option value="-1">- Select -</option>
+                                        <option class="level-0" value="49">Small</option>
+                                        <option class="level-0" value="49">Medium</option>
+                                        <option class="level-0" value="56">Large</option>
+                                        <option class="level-0" value="56">X-Large</option>
+                                    </select>
+                                </div>
+                                <div class="full-row">
+                                    <label for="cat2">Color:</label>
+                                    <select name="cat2" id="cat2" class="postform">
+                                        <option value="-1">- Select -</option>
+                                        <option class="level-0" value="2">Blue</option>
+                                        <option class="level-0" value="3">Red</option>
+                                        <option class="level-0" value="1">Pink</option>
+                                        <option class="level-0" value="4">Black</option>
+                                        <option class="level-0" value="4">Wlack</option>
+                                    </select>
+                                </div>
+                            </div> <!-- /.col-md-6 -->
+                            <div class="col-md-12 col-sm-12">
+                                <div class="button-holder">
+                                    <a href="#" class="red-btn"><i class="fa fa-angle-down"></i></a>
+                                </div> <!-- /.button-holder -->
+                            </div> <!-- /.col-md-12 -->
+                        </div> <!-- /.row -->
+                    </div> <!-- /.product-content -->';
+                    $html = $htmlRight;
+                    break;
+                case 4:
+                    $htmlThumb = 
+            '<div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="product-item-4">
                     <div class="product-thumb">
                         <img src="'.$img.'" alt="'.$titulo.'">
                     </div> <!-- /.product-thumb -->
-                    <div class="product-content">
+                    <div class="product-content overlay">
                         <h5><a href="#">'.$titulo.'</a></h5>
                         <span class="tagline">'.$proveedor.'</span>
                         <span class="price">'.$precio.'</span>
                         <p>'.$desc.'</p>
                     </div> <!-- /.product-content -->
-                </div> <!-- /.product-item --> ';
-            
-            $htmlThumb = '<div class="product-thumb">
+                </div> <!-- /.product-item-4 -->
+            </div> <!-- /.col-md-4 -->';
+                        
+                    $html = $htmlThumb;
+                    break;
+                
+                case 5:
+                    $htmlNewProd = '<div class="col-md-3 col-sm-6">
+                <div class="product-item">
+                    <div class="product-thumb">
+                        <img src="'.$img.'" alt="">
+                    </div> <!-- /.product-thum -->
+                    <div class="product-content">
+                        <h5><a href="#">'.$titulo.'</a></h5>
+                        <span class="price">'.$precio.'</span>
+                    </div> <!-- /.product-content -->
+                </div> <!-- /.product-item -->
+            </div> <!-- /.col-md-3 -->';
+                    $html = $htmlNewProd;
+                    break;
+                default:
+                    $htmlThumb = '<div class="product-thumb">
                             <img src="'.$img.'" alt="'.$titulo.'">
                         </div> <!-- /.product-thumb -->
                         <div class="product-content overlay">
@@ -749,13 +837,6 @@ class ControllerBase extends Controller {
                             <span class="price">'.$precio.'</span>
                             <p>'.$desc.'</p>
                         </div> <!-- /.product-content -->';
-            
-            switch ($mode) {
-                case 1:
-                    $html = $htmlUnder;
-                    break;
-
-                default:
                     $html = $htmlThumb;
                     break;
             }
