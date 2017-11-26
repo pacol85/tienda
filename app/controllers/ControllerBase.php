@@ -844,5 +844,24 @@ class ControllerBase extends Controller {
             return $html;
         }
         
+        /**
+         * Traer Banner
+         */
+        public function storeBanner($img, $titulo){
+            $html = 
+                '<div class="content-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="product-thumb">
+                                    <img src="'.$img.'" alt="'.$titulo.'">
+                                </div>
+                            </div> <!-- /.col-md-12 -->            
+                        </div> <!-- /.row -->
+                    </div>
+                </div>';
+            
+            return $html;
+        }
         
 }
