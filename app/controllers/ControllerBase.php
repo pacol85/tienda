@@ -847,7 +847,7 @@ class ControllerBase extends Controller {
         /**
          * Traer Banner
          */
-        public function storeBanner($img, $titulo){
+        public function storeBanner($img, $titulo, $logo, $tienda, $desc){
             $html = 
                 '<div class="content-section">
                     <div class="container">
@@ -859,9 +859,30 @@ class ControllerBase extends Controller {
                             </div> <!-- /.col-md-12 -->            
                         </div> <!-- /.row -->
                     </div>
-                </div>';
+                </div>
+                <div class="content-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="product-thumb">
+                                    <img src="'.$logo.'" alt="'.$titulo.'">
+                                </div>
+                            </div> <!-- /.section -->
+                            <div  class="col-md-10">
+                                <div>
+                                    <h2>'.$tienda.'</h2>
+                                </div>
+                                <div>
+                                    '.$desc.'
+                                </div>
+                            </div>
+                        </div> <!-- /.row -->        
+                    </div>
+                </div>
+';
             
             return $html;
         }
+        
         
 }

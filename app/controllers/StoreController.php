@@ -39,8 +39,10 @@ class StoreController extends ControllerBase
         
         $this->view->newProd = $newProd;
         
-        $banner = parent::storeBanner("images/storeBanner.jpg", "tienda1");
-        $this->view->banner = $banner;
+        $banner = parent::storeBanner("images/storeBanner.jpg", "tienda1", "images/storeLogo.jpg","Nombre de la Tienda", "Descripcion de la tienda para explicar el tipo de cosas que ofrecen"
+                . "Esta es una prueba");
+        $this->view->storeTop = $banner;
+        $this->view->products = $prodThumb1.$prodThumb2.$prodThumb3;
     }
 
 }

@@ -28,6 +28,12 @@ class Itemsxinvoice extends \Phalcon\Mvc\Model
     public $cant;
 
     /**
+     *
+     * @var string
+     */
+    public $price;
+
+    /**
      * Initialize method for model.
      */
     public function initialize()

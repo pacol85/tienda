@@ -1,6 +1,6 @@
 <?php
 
-class Invoice extends \Phalcon\Mvc\Model
+class Later extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -13,37 +13,7 @@ class Invoice extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $code;
-
-    /**
-     *
-     * @var string
-     */
-    public $cdate;
-
-    /**
-     *
-     * @var string
-     */
-    public $saddress;
-
-    /**
-     *
-     * @var string
-     */
-    public $caddress;
-
-    /**
-     *
-     * @var string
-     */
-    public $total;
-
-    /**
-     *
-     * @var string
-     */
-    public $shipping;
+    public $cant;
 
     /**
      *
@@ -52,11 +22,17 @@ class Invoice extends \Phalcon\Mvc\Model
     public $user;
 
     /**
+     *
+     * @var string
+     */
+    public $item;
+
+    /**
      * Initialize method for model.
      */
     public function initialize()
     {
-        $this->hasMany('id', 'Itemsxinvoice', 'invoice', array('alias' => 'Itemsxinvoice'));
+        $this->belongsTo('item', 'Items', 'id', array('alias' => 'Items'));
         $this->belongsTo('user', 'Users', 'id', array('alias' => 'Users'));
     }
 
@@ -67,14 +43,14 @@ class Invoice extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'invoice';
+        return 'later';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Invoice[]
+     * @return Later[]
      */
     public static function find($parameters = null)
     {
@@ -85,7 +61,7 @@ class Invoice extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Invoice
+     * @return Later
      */
     public static function findFirst($parameters = null)
     {
