@@ -739,6 +739,7 @@ class ControllerBase extends Controller {
                                 <span class="tagline">'.$proveedor.'</span>
                                 <span class="price">'.$precio.'</span>
                                 <p>'.$desc.'</p>
+                                <a href="./store" class="btn btn-default btn-xs" role="button">Add to Cart</a>
                             </div> <!-- /.product-content -->
                         </div> <!-- /.product-item --> ';
                     $html = $htmlUnder;
@@ -753,6 +754,7 @@ class ControllerBase extends Controller {
                                 <h5><a href="#">'.$titulo.'</a></h5>
                                 <span class="tagline">'.$proveedor.'</span>
                                 <span class="price">'.$precio.'</span>
+                                <a href="./store" class="btn btn-default btn-xs" role="button">Add to Cart</a>
                             </div> <!-- /.col-md-6 -->
                             <div class="col-md-6 col-sm-6">
                                 <div class="full-row">
@@ -805,7 +807,8 @@ class ControllerBase extends Controller {
                         <h5><a href="#">'.$titulo.'</a></h5>
                         <span class="tagline">'.$proveedor.'</span>
                         <span class="price">'.$precio.'</span>
-                        <p>'.$desc.'</p>
+                        <span class="tagline">'.$desc.'</span>
+                        <a href="./store" class="btn btn-default btn-xs" role="button">Add to Cart</a>
                     </div> <!-- /.product-content -->
                 </div> <!-- /.product-item-4 -->
             </div> <!-- /.col-md-4 -->';
@@ -822,6 +825,7 @@ class ControllerBase extends Controller {
                     <div class="product-content">
                         <h5><a href="#">'.$titulo.'</a></h5>
                         <span class="price">'.$precio.'</span>
+                        <a href="./store" class="btn btn-default btn-xs" role="button">Add to Cart</a>
                     </div> <!-- /.product-content -->
                 </div> <!-- /.product-item -->
             </div> <!-- /.col-md-3 -->';
@@ -836,6 +840,7 @@ class ControllerBase extends Controller {
                             <span class="tagline">'.$proveedor.'</span>
                             <span class="price">'.$precio.'</span>
                             <p>'.$desc.'</p>
+                            <a href="./store" class="btn btn-default btn-xs" role="button">Add to Cart</a>
                         </div> <!-- /.product-content -->';
                     $html = $htmlThumb;
                     break;

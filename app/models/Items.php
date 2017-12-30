@@ -40,14 +40,22 @@ class Items extends \Phalcon\Mvc\Model
     public $mdate;
 
     /**
+     *
+     * @var string
+     */
+    public $store;
+
+    /**
      * Initialize method for model.
      */
     public function initialize()
     {
+        $this->hasMany('id', 'Cart', 'item', array('alias' => 'Cart'));
         $this->hasMany('id', 'Ireview', 'item', array('alias' => 'Ireview'));
         $this->hasMany('id', 'Itempics', 'item', array('alias' => 'Itempics'));
         $this->hasMany('id', 'Itemsxinvoice', 'item', array('alias' => 'Itemsxinvoice'));
         $this->hasMany('id', 'Specs', 'item', array('alias' => 'Specs'));
+        $this->belongsTo('store', 'Store', 'id', array('alias' => 'Store'));
     }
 
     /**

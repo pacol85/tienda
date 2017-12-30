@@ -93,6 +93,8 @@ class Users extends \Phalcon\Mvc\Model
      */
     public function initialize()
     {
+        $this->hasMany('id', 'Cart', 'user', array('alias' => 'Cart'));
+        $this->hasMany('id', 'Invoice', 'user', array('alias' => 'Invoice'));
         $this->hasMany('id', 'Ireview', 'user', array('alias' => 'Ireview'));
         $this->hasMany('id', 'Passwords', 'user', array('alias' => 'Passwords'));
         $this->hasMany('id', 'Sreview', 'user', array('alias' => 'Sreview'));

@@ -68,6 +68,7 @@ class Store extends \Phalcon\Mvc\Model
      */
     public function initialize()
     {
+        $this->hasMany('id', 'Items', 'store', array('alias' => 'Items'));
         $this->hasMany('id', 'Sreview', 'store', array('alias' => 'Sreview'));
         $this->belongsTo('owner', 'Users', 'id', array('alias' => 'Users'));
     }

@@ -28,6 +28,18 @@ class Cart extends \Phalcon\Mvc\Model
     public $item;
 
     /**
+     *
+     * @var string
+     */
+    public $later;
+
+    /**
+     *
+     * @var string
+     */
+    public $price;
+
+    /**
      * Initialize method for model.
      */
     public function initialize()
