@@ -23,7 +23,7 @@ class Items extends \Phalcon\Mvc\Model
 
     /**
      *
-     * @var double
+     * @var string
      */
     public $value;
 

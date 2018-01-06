@@ -381,11 +381,19 @@ class ControllerBase extends Controller {
 	/*
 	 * Funcion para el dispatcher Forward
 	 */
-	public function forward($controller, $action) {
-		return $this->dispatcher->forward ( array (
-				"controller" => $controller,
-				"action" => $action 
-		) );
+	public function forward($controller, $action, $params) {
+		if(count($params)>0){
+			return $this->dispatcher->forward ( array (
+					"controller" => $controller,
+					"action" => $action,
+					"params" => $params
+			) );
+		}else{
+			return $this->dispatcher->forward ( array (
+					"controller" => $controller,
+					"action" => $action
+			) );
+		}
 	}
 	
 	/*

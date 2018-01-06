@@ -44,6 +44,107 @@ class StoreController extends ControllerBase
         $this->view->storeTop = $banner;
         $this->view->products = $prodThumb1.$prodThumb2.$prodThumb3;
     }
+    
+    public function productosAction($sid)
+    {
+        //parent::limpiar();
+        $store = Store::findFirst($sid);
+    	$campos = [
+            ["t", ["nombre"], "Nombre"],
+            ["t", ["desc"], "Descripci&oacute;n"],
+            ["m", ["valor", "0.0"], "Precio"],
+            ["f", ["foto"], "Foto"],
+            ["s", ["guardar"], "Guardar"]
+            ];
+        
+        $head = ["Producto", "Descripci&oacute;n", "Valor", "Foto", "Acciones"];
+        $tabla = parent::thead("Productos", $head);
+        $items = Items::find("store = $store->id");
+
+        foreach ($items as $i){
+            $tabla = $tabla.parent::tbody([
+                $i->name,
+                $i->desc,
+                $i->value,
+                "foto",
+                parent::a(2, "cargarDatos('".$i->id."','".$i->name."','".$i->desc.
+                                "','".$i->value."');", 
+                                "Editar")." | ".					
+                parent::a(1,"store/eliminar/$i->id", "Eliminar")
+            ]);
+        }
+
+        //js
+        $fields = ["id", "nombre", "desc", "valor"];
+        $otros = "";
+        $jsBotones = ["form1", "menu/edit", "menu"];
+		
+    	$form = parent::multiForm($campos, "store/nuevoProducto/$store->id", "form1");
+    	$tabla = parent::ftable($tabla);
+    
+    	parent::view("Items para Tienda: $store->name", $form, $tabla, [$fields, $otros, $jsBotones]);//, [$fields, $otros, $jsBotones]);
+    }
+    
+    /**
+     * 
+     * @return view
+     */
+    public function nuevoProductoAction($sid){
+    	if(parent::vPost("nombre") && parent::vPost("valor")){
+            $nombre = parent::gPost("nombre");
+            $nombres = Items::find("name like '$nombre' and store = $sid");
+            if(count($nombres) > 0){
+                parent::msg("El nombre ingresado ya existe para esta tienda");
+                return parent::forward("store", "productos", [$sid]);
+            }
+            
+            $item = new Items();
+            $item->cdate = parent::fechaHoy(true);
+            $item->desc = parent::gPost("desc");
+            $item->name = $nombre;
+            $item->store = $sid;
+            $item->value = parent::gPost("valor");
+            if($item->save()){
+                $this->uploadFile($this->request, $item->id, $sid);                    
+            }else{
+                parent::msg("", "db");
+            }
+        }else{
+            parent::msg("Alguno de los campos obligatorios como Nombre y Precio no pueden quedar en blanco");
+        }
+        return parent::forward("store", "productos", [$sid]);
+    }
+    
+    function uploadFile($request, $item, $sid) {
+        if (true == $request->hasFiles() && $request->isPost()) {
+            $upload_dir = 'img/'. $sid. '/'. $item . '/' ;//APP_PATH . '\\public\\img\\'. $sid. '\\'. $item->id . '\\' ;
+            if (!is_dir($upload_dir)) {
+                if(!mkdir($upload_dir, 0777, true)) {
+                    parent::msg('Fallo al crear las carpetas...');
+                    return;
+                }
+            }
+
+            foreach ($request->getUploadedFiles() as $file) {
+                if(strlen($file->getName()) > 0){
+                    $foto = new Itempics();
+                    $foto->cdate = parent::fechaHoy(true);
+                    $foto->item = $item;
+                    $foto->name = $file->getName();
+                    $foto->pic = $upload_dir . $file->getName();
+                    if(!$foto->save()){
+                        parent::msg("Foto no pudo ser guardada, pero el producto fue creado");                                
+                    }else{
+                        $file->moveTo($foto->pic);
+                    }
+
+                }    				
+            }
+
+        }else{
+            parent::msg("No se encontr&oacute; foto para subir", "w");
+        }
+    }
 
 }
 

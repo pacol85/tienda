@@ -41,12 +41,6 @@ class Store extends \Phalcon\Mvc\Model
 
     /**
      *
-     * @var integer
-     */
-    public $sellername;
-
-    /**
-     *
      * @var string
      */
     public $bgpattern;
