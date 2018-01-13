@@ -304,7 +304,13 @@ class ControllerBase extends Controller {
 	}
 	
 	public function thead($id, $head) {
-		$tabla = '<div id="tdiv"><table id="' . $id . '" class="display" cellspacing="0"><thead><tr>';
+            //<div id="tdiv">
+		$tabla = '
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table id="' . $id . '" class="table display" cellspacing="0">'
+                        . '<thead><tr>';
 		
 		// Dibujar table head
 		foreach ( $head as $h ) {
@@ -327,7 +333,7 @@ class ControllerBase extends Controller {
 		return $td;
 	}
 	public function ftable($tabla) {
-		$tabla = $tabla . '</tbody></table></div>';
+		$tabla = $tabla . '</tbody></table></div></div></div>';
 		return $tabla;
 	}
 	public function jsCargarDatos($campos, $hide = null, $show = null, $otros = null) {

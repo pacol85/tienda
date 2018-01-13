@@ -58,7 +58,7 @@ class StoreController extends ControllerBase
             ];
         
         $head = ["Producto", "Descripci&oacute;n", "Valor", "Foto", "Acciones"];
-        $tabla = parent::thead("Productos", $head);
+        $tabla = parent::thead("productos", $head);
         $items = Items::find("store = $store->id");
 
         foreach ($items as $i){
@@ -80,8 +80,7 @@ class StoreController extends ControllerBase
         $jsBotones = ["form1", "menu/edit", "menu"];
 		
     	$form = parent::multiForm($campos, "store/nuevoProducto/$store->id", "form1");
-    	$tabla = parent::ftable($tabla);
-    
+    	
     	parent::view("Items para Tienda: $store->name", $form, $tabla, [$fields, $otros, $jsBotones]);//, [$fields, $otros, $jsBotones]);
     }
     
