@@ -62,11 +62,17 @@ class StoreController extends ControllerBase
         $items = Items::find("store = $store->id");
 
         foreach ($items as $i){
+            //load foto
+            $fotoF = Itempics::find("item = $i->id", "name like '" . $i->id . "001'");
+            $foto = "Pendiente";
+            if(count($fotoF) > 0){
+                $foto = "<img src='". $fotoF[0]->pic . "' class='prodImg' >";
+            }
             $tabla = $tabla.parent::tbody([
                 $i->name,
                 $i->desc,
                 $i->value,
-                "foto",
+                $foto,
                 parent::a(2, "cargarDatos('".$i->id."','".$i->name."','".$i->desc.
                                 "','".$i->value."');", 
                                 "Editar")." | ".					
@@ -84,6 +90,15 @@ class StoreController extends ControllerBase
     	parent::view("Items para Tienda: $store->name", $form, $tabla, [$fields, $otros, $jsBotones]);//, [$fields, $otros, $jsBotones]);
     }
     
+    /**
+     * loadImg($fotoF[0]->pic)
+     */
+    public function loadImg($img){
+        $html = "<img href='$img' >";
+        return $html;
+    }
+
+
     /**
      * 
      * @return view
@@ -129,8 +144,10 @@ class StoreController extends ControllerBase
                     $foto = new Itempics();
                     $foto->cdate = parent::fechaHoy(true);
                     $foto->item = $item;
-                    $foto->name = $file->getName();
-                    $foto->pic = $upload_dir . $file->getName();
+                    //find extension to only change name
+                    $ext = substr($file->getName(), strpos($file->getName(), "."));
+                    $foto->name = $item . "001". $ext; //$file->getName();
+                    $foto->pic = $upload_dir . $foto->name; //$file->getName();
                     if(!$foto->save()){
                         parent::msg("Foto no pudo ser guardada, pero el producto fue creado");                                
                     }else{
@@ -143,6 +160,14 @@ class StoreController extends ControllerBase
         }else{
             parent::msg("No se encontr&oacute; foto para subir", "w");
         }
+    }
+    
+    /**
+     * 
+     * @return view
+     */
+    public function eliminarAction($sid){
+        
     }
 
 }
